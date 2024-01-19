@@ -32,7 +32,7 @@ public class Restaurant {
     private Integer price;
 
     @Column(name = "seats")
-    private Integer seats;
+    private String seats;
     
     @Column(name = "postal_code")
     private String postalCode;
