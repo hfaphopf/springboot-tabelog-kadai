@@ -24,7 +24,7 @@ public class RestaurantEditForm {
 		
 		@NotNull(message = "価格帯を入力してください。")
 	    @Min(value = 100, message = "価格帯は100円以上に設定してください。")
-	    private Integer price;
+	    private String price;
 		
 		@NotBlank(message = "郵便番号を入力してください。")
 	    private String postalCode;
