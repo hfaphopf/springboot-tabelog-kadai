@@ -67,7 +67,7 @@ public class AdminRestaurantController {
 	@PostMapping("/create")
     public String create(@ModelAttribute @Validated RestaurantRegisterForm restaurantRegisterForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {        
         if (bindingResult.hasErrors()) {
-            return "admin/houses/register";
+            return "admin/restaurants/register";
         }
         
         restaurantService.create(restaurantRegisterForm);
@@ -89,14 +89,24 @@ public class AdminRestaurantController {
     }
 	
 	 @PostMapping("/{id}/update")
-     public String update(@ModelAttribute @Validated RestaurantEditForm houseEditForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {        
+     public String update(@ModelAttribute @Validated RestaurantEditForm restaurantEditForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {        
          if (bindingResult.hasErrors()) {
              return "admin/restaurants/edit";
          }
          
-         restaurantService.update(houseEditForm);
+         restaurantService.update(restaurantEditForm);
          redirectAttributes.addFlashAttribute("successMessage", "店舗情報を編集しました。");
          
          return "redirect:/admin/restaurants";
      }
+	 
+	 @PostMapping("/{id}/delete")
+     public String delete(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes) {        
+         restaurantRepository.deleteById(id);
+                 
+         redirectAttributes.addFlashAttribute("successMessage", "店舗を削除しました。");
+         
+         return "redirect:/admin/restaurants";
+     }
 }
+
