@@ -15,10 +15,10 @@
              <main>
 				 <div class="container nagoyameshi-container pb-5">
                      <div class="row justify-content-center">
-                         <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                         <nav class="my-3" style="--bs-breadcrumb-divider: '>';" category-label="breadcrumb">
                              <ol class="breadcrumb mb-0">                        
                                  <li class="breadcrumb-item"><a th:href="@{/}">ホーム</a></li>
-                                 <li class="breadcrumb-item active" aria-current="page">店舗一覧</li>
+                                 <li class="breadcrumb-item active" category-current="page">店舗一覧</li>
                              </ol>
                          </nav>         
              
@@ -37,40 +37,40 @@
                                  <div class="card-body">
                                      <form method="get" th:action="@{/restaurants}" class="w-100">
                                          <div class="form-group mb-3">
-											 <select class="form-control form-select" name="genre">  
+											 <select class="form-control form-select" name="category">  
                                                  <option value="" hidden>選択してください</option>
                                                  <optgroup label="和食">
-													 <option value="和食" th:selected="${genre == '和食'}">和食</option>
-													 <option value="寿司" th:selected="${genre == '寿司'}">寿司</option>
-													 <option value="たこ焼き" th:selected="${genre == 'たこ焼き'}">たこ焼き</option>
-													 <option value="お好み焼き" th:selected="${genre == 'お好み焼き'}">お好み焼き</option>
-													 <option value="鍋料理" th:selected="${genre == '鍋料理'}">鍋料理</option>
+													 <option value="和食" th:selected="${category == '和食'}">和食</option>
+													 <option value="寿司" th:selected="${category == '寿司'}">寿司</option>
+													 <option value="たこ焼き" th:selected="${category == 'たこ焼き'}">たこ焼き</option>
+													 <option value="お好み焼き" th:selected="${category == 'お好み焼き'}">お好み焼き</option>
+													 <option value="鍋料理" th:selected="${category == '鍋料理'}">鍋料理</option>
 												 </optgroup>
 												 <optgroup label="麵料理">
-													 <option value="ラーメン" th:selected="${genre == 'ラーメン'}">ラーメン</option>
-													 <option value="うどん" th:selected="${genre == 'うどん'}">うどん</option>
+													 <option value="ラーメン" th:selected="${category == 'ラーメン'}">ラーメン</option>
+													 <option value="うどん" th:selected="${category == 'うどん'}">うどん</option>
 												 </optgroup>
 												 <optgroup label="肉料理">
-													 <option value="揚げ物" th:selected="${genre == '揚げ物'}">揚げ物</option>
-													 <option value="焼肉" th:selected="${genre == '焼肉'}">焼肉</option>
-													 <option value="ハンバーグ" th:selected="${genre == 'ハンバーグ'}">ハンバーグ</option>
-													 <option value="焼き鳥" th:selected="${genre == '焼き鳥'}">焼き鳥</option>
-													 <option value="ステーキ" th:selected="${genre == 'ステーキ'}">ステーキ</option>
+													 <option value="揚げ物" th:selected="${category == '揚げ物'}">揚げ物</option>
+													 <option value="焼肉" th:selected="${category == '焼肉'}">焼肉</option>
+													 <option value="ハンバーグ" th:selected="${category == 'ハンバーグ'}">ハンバーグ</option>
+													 <option value="焼き鳥" th:selected="${category == '焼き鳥'}">焼き鳥</option>
+													 <option value="ステーキ" th:selected="${category == 'ステーキ'}">ステーキ</option>
 												 </optgroup>
 												 <optgroup label="外国料理">
-													 <option value="フランス料理" th:selected="${genre == 'フランス料理'}">フランス料理</option>
-													 <option value="タイ料理" th:selected="${genre == 'タイ料理'}">タイ料理</option>
-													 <option value="中華料理" th:selected="${genre == '中華料理'}">中華料理</option>
-													 <option value="カレー" th:selected="${genre == 'カレー'}">カレー</option>	 
+													 <option value="フランス料理" th:selected="${category == 'フランス料理'}">フランス料理</option>
+													 <option value="タイ料理" th:selected="${category == 'タイ料理'}">タイ料理</option>
+													 <option value="中華料理" th:selected="${category == '中華料理'}">中華料理</option>
+													 <option value="カレー" th:selected="${category == 'カレー'}">カレー</option>	 
 												 </optgroup>
 												 <optgroup label="喫茶店">
-													 <option value="喫茶店" th:selected="${genre == '喫茶店'}">喫茶店</option>
+													 <option value="喫茶店" th:selected="${category == '喫茶店'}">喫茶店</option>
 												 </optgroup>
 												 <optgroup label="スイーツ">
-													 <option value="スイーツ" th:selected="${genre == 'スイーツ'}">スイーツ</option>
+													 <option value="スイーツ" th:selected="${category == 'スイーツ'}">スイーツ</option>
 												 </optgroup>
 												 <optgroup label="パン">
-													 <option value="パン" th:selected="${genre == 'パン'}">パン</option>
+													 <option value="パン" th:selected="${category == 'パン'}">パン</option>
 												 </optgroup>
 											 </select> 
                                          </div>
@@ -117,7 +117,7 @@
                                  
                                  <form method="get" th:action="@{/restaurants}" class="mb-3 nagoyameshi-sort-box"> 
                                      <input th:if="${keyword}" type="hidden" name="keyword" th:value="${keyword}">
-                                     <input th:if="${genre}" type="hidden" name="genre" th:value="${genre}">
+                                     <input th:if="${category}" type="hidden" name="category" th:value="${category}">
                                      <input th:if="${price}" type="hidden" name="price" th:value="${price}">                                      
                                      <select class="form-select form-select-sm" name="order" onChange="this.form.submit();">
                                          <option value="createdAtDesc" th:selected="${order == 'createdAtDesc' || order == null}">新着順</option>                                            
@@ -165,15 +165,15 @@
                                      <ul class="pagination">
                                          <li class="page-item">
                                              <span th:if="${restaurantPage.isFirst()}" class="page-link disabled">前</span>
-                                             <a th:unless="${restaurantPage.isFirst()}" th:href="@{/restaurants(page = ${restaurantPage.getNumber() - 1}, keyword = ${keyword}, genre = ${genre}, price = ${price}, order = ${order})}" class="page-link nagoyameshi-page-link">前</a>
+                                             <a th:unless="${restaurantPage.isFirst()}" th:href="@{/restaurants(page = ${restaurantPage.getNumber() - 1}, keyword = ${keyword}, category = ${category}, price = ${price}, order = ${order})}" class="page-link nagoyameshi-page-link">前</a>
                                          </li>
                                          <li th:each="i : ${#numbers.sequence(0, restaurantPage.getTotalPages() - 1)}" class="page-item">
                                              <span th:if="${i == restaurantPage.getNumber()}" class="page-link active nagoyameshi-active" th:text="${i + 1}"></span>
-                                             <a th:unless="${i == restaurantPage.getNumber()}" th:href="@{/restaurants(page = ${i}, keyword = ${keyword}, genre = ${genre}, price = ${price}, order = ${order})}" class="page-link nagoyameshi-page-link" th:text="${i + 1}"></a>
+                                             <a th:unless="${i == restaurantPage.getNumber()}" th:href="@{/restaurants(page = ${i}, keyword = ${keyword}, category = ${category}, price = ${price}, order = ${order})}" class="page-link nagoyameshi-page-link" th:text="${i + 1}"></a>
                                          </li>
                                          <li class="page-item">                        
                                              <span th:if="${restaurantPage.isLast()}" class="page-link disabled">次</span>
-                                             <a th:unless="${restaurantPage.isLast()}" th:href="@{/restaurants(page = ${restaurantPage.getNumber() + 1}, keyword = ${keyword}, genre = ${genre}, price = ${price}, order = ${order})}" class="page-link nagoyameshi-page-link">次</a>
+                                             <a th:unless="${restaurantPage.isLast()}" th:href="@{/restaurants(page = ${restaurantPage.getNumber() + 1}, keyword = ${keyword}, category = ${category}, price = ${price}, order = ${order})}" class="page-link nagoyameshi-page-link">次</a>
                                          </li>
                                      </ul>
                                  </nav> 
