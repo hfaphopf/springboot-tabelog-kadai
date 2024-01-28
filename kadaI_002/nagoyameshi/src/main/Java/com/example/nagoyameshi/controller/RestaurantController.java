@@ -7,6 +7,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +24,7 @@ public class RestaurantController {
    
      @GetMapping
      public String index(@RequestParam(name = "keyword", required = false) String keyword,
-    		             @RequestParam(name = "genre", required = false) String genre,
+    		             @RequestParam(name = "category", required = false) String category,
                          @RequestParam(name = "price", required = false) Integer price,
                          @RequestParam(name = "order", required = false) String order,
                          @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
@@ -37,11 +38,11 @@ public class RestaurantController {
              } else {
             	 restaurantPage = restaurantRepository.findByNameLikeOrAddressLikeOrderByCreatedAtDesc("%" + keyword + "%", "%" + keyword + "%", pageable);
              }
-         } else if (genre != null && !genre.isEmpty()) {
+         } else if (category != null && !category.isEmpty()) {
         	 if (order != null && order.equals("priceAsc")) {
-        		 restaurantPage = restaurantRepository.findByAddressLikeOrderByPriceAsc("%" + genre + "%", pageable);
+        		 restaurantPage = restaurantRepository.findByAddressLikeOrderByPriceAsc("%" + category + "%", pageable);
              } else {
-            	 restaurantPage = restaurantRepository.findByAddressLikeOrderByCreatedAtDesc("%" + genre + "%", pageable);
+            	 restaurantPage = restaurantRepository.findByAddressLikeOrderByCreatedAtDesc("%" + category + "%", pageable);
              }
          } else if (price != null) {
         	 if (order != null && order.equals("priceAsc")) {
@@ -59,10 +60,19 @@ public class RestaurantController {
          
          model.addAttribute("restaurantPage", restaurantPage);
          model.addAttribute("keyword", keyword);
-         model.addAttribute("genre", genre);
+         model.addAttribute("category", category);
          model.addAttribute("price", price);
          model.addAttribute("order", order);
          
          return "restaurants/index";
+         
+         @GetMapping("/{id}")
+         public String show(@PathVariable(name = "id") Integer id, Model model) {
+             House house = houseRepository.getReferenceById(id);
+             
+             model.addAttribute("restaurant", restaurant);         
+             
+             return "restaurants/show";
+         }
      }
 }
