@@ -24,26 +24,44 @@ public class RestaurantController {
      @GetMapping
      public String index(@RequestParam(name = "keyword", required = false) String keyword,
     		             @RequestParam(name = "genre", required = false) String genre,
-                         @RequestParam(name = "price", required = false) Integer price,                        
+                         @RequestParam(name = "price", required = false) Integer price,
+                         @RequestParam(name = "order", required = false) String order,
                          @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
                          Model model) 
      {
          Page<Restaurant> restaurantPage;
                  
          if (keyword != null && !keyword.isEmpty()) {
-        	 restaurantPage = restaurantRepository.findByNameLikeOrAddressLike("%" + keyword + "%", "%" + keyword + "%", pageable);
+        	 if (order != null && order.equals("priceAsc")) {
+        		 restaurantPage = restaurantRepository.findByNameLikeOrAddressLikeOrderByPriceAsc("%" + keyword + "%", "%" + keyword + "%", pageable);
+             } else {
+            	 restaurantPage = restaurantRepository.findByNameLikeOrAddressLikeOrderByCreatedAtDesc("%" + keyword + "%", "%" + keyword + "%", pageable);
+             }
          } else if (genre != null && !genre.isEmpty()) {
-        	 restaurantPage = restaurantRepository.findByAddressLike("%" + genre + "%", pageable);
+        	 if (order != null && order.equals("priceAsc")) {
+        		 restaurantPage = restaurantRepository.findByAddressLikeOrderByPriceAsc("%" + genre + "%", pageable);
+             } else {
+            	 restaurantPage = restaurantRepository.findByAddressLikeOrderByCreatedAtDesc("%" + genre + "%", pageable);
+             }
          } else if (price != null) {
-        	 restaurantPage = restaurantRepository.findByPriceLessThanEqual(price, pageable);
+        	 if (order != null && order.equals("priceAsc")) {
+        		 restaurantPage = restaurantRepository.findByPriceLessThanEqualOrderByPriceAsc(price, pageable);
+             } else {
+            	 restaurantPage = restaurantRepository.findByPriceLessThanEqualOrderByCreatedAtDesc(price, pageable);
+             }
          } else {
-        	 restaurantPage = restaurantRepository.findAll(pageable);
+        	 if (order != null && order.equals("priceAsc")) {
+        		 restaurantPage = restaurantRepository.findAllByOrderByPriceAsc(pageable);
+             } else {
+            	 restaurantPage = restaurantRepository.findAllByOrderByCreatedAtDesc(pageable);   
+             }
          }                
          
          model.addAttribute("restaurantPage", restaurantPage);
          model.addAttribute("keyword", keyword);
          model.addAttribute("genre", genre);
-         model.addAttribute("price", price);                              
+         model.addAttribute("price", price);
+         model.addAttribute("order", order);
          
          return "restaurants/index";
      }
