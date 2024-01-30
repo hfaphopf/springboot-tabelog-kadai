@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.nagoyameshi.entity.Restaurant;
+import com.example.nagoyameshi.form.ReservationInputForm;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 
 @Controller
@@ -65,14 +66,15 @@ public class RestaurantController {
          model.addAttribute("order", order);
          
          return "restaurants/index";
-         
+     }
+     
          @GetMapping("/{id}")
          public String show(@PathVariable(name = "id") Integer id, Model model) {
-             House house = houseRepository.getReferenceById(id);
+        	 Restaurant restaurant = restaurantRepository.getReferenceById(id);
              
-             model.addAttribute("restaurant", restaurant);         
+             model.addAttribute("restaurant", restaurant);
+             model.addAttribute("reservationInputForm", new ReservationInputForm());
              
              return "restaurants/show";
          }
      }
-}
