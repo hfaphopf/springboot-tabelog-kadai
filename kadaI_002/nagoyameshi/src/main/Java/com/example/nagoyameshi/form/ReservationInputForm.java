@@ -16,9 +16,19 @@ public class ReservationInputForm {
     @Min(value = 1, message = "人数は1人以上に設定してください。")
     private Integer numberOfPeople; 
     
- // 予約日を取得する	
+ // 予約日を取得する
+    
+    //フィールド
+    private LocalDate checkinDate;
+    
+    //ゲッター
     public LocalDate getCheckinDate() {
         String checkReservationDate = getReservationDate();
         return LocalDate.parse(checkReservationDate);
+    }
+    
+    //セッター
+    public void setCheckinDate(LocalDate checkinDate) {
+    	this.checkinDate = checkinDate;
     }
 }
