@@ -1,5 +1,6 @@
 package com.example.nagoyameshi.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.nagoyameshi.form.CompanyEditForm;
+import com.example.nagoyameshi.repository.UserRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
 
 @Controller
@@ -32,4 +34,10 @@ public class Companycontroller {
 	    
 	    return "redirect:/company"; // 編集後に会社情報ページにリダイレクト
 	}
+	
+	private final UserRepository userRepository;
+
+    public Companycontroller(UserRepository userRepository) {
+        this.userRepository = userRepository;            
+    }
 }
