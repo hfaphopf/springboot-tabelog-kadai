@@ -23,8 +23,9 @@ public class ReservationInputForm {
     
     //ゲッター
     public LocalDate getCheckinDate() {
-        String checkReservationDate = getReservationDate();
-        return LocalDate.parse(checkReservationDate);
+//        String checkReservationDate = getReservationDate();
+//        return LocalDate.parse(checkReservationDate);
+    	return this.checkinDate;
     }
     
     //セッター
