@@ -61,7 +61,7 @@ public class ReservationController {
     	Integer seats = restaurant.getSeats();
         
         if (numberOfPeople != null) {
-            if (!reservationService.isWithinCapacity(numberOfPeople, seats)) {
+            if (!reservationService.isWithinSeats(numberOfPeople, seats)) {
                 FieldError fieldError = new FieldError(bindingResult.getObjectName(), "numberOfPeople", "人数が定員を超えています。");
                 bindingResult.addError(fieldError);                
             }
