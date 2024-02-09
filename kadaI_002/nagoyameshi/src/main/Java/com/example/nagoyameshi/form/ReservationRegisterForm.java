@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
- @AllArgsConstructor
+@AllArgsConstructor
 public class ReservationRegisterForm {
-	
-	 private Integer restaurantId;
-     
-     private Integer userId;    
-  
-     private String reservationDate;   
-     
-     private Integer numberOfPeople;
-	}
+
+	public Integer restaurantId;
+
+	public Integer userId;
+
+	public String reservationDate;
+
+	public Integer numberOfPeople;
+}
