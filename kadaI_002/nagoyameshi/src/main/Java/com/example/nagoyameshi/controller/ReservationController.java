@@ -29,73 +29,74 @@ import com.example.nagoyameshi.service.ReservationService;
 @Controller
 public class ReservationController {
 	private final ReservationRepository reservationRepository;
-	 private final RestaurantRepository restaurantRepository;
-     private final ReservationService reservationService; 
-    
-    public ReservationController(ReservationRepository reservationRepository, RestaurantRepository restaurantRepository, ReservationService reservationService) {        
-        this.reservationRepository = reservationRepository;
-        this.restaurantRepository = restaurantRepository;
-        this.reservationService = reservationService;
-    }    
+	private final RestaurantRepository restaurantRepository;
+	private final ReservationService reservationService;
 
-    @GetMapping("/reservations")
-    public String index(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl, @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable, Model model) {
-        User user = userDetailsImpl.getUser();
-        Page<Reservation> reservationPage = reservationRepository.findByUserOrderByCreatedAtDesc(user, pageable);
-        
-        model.addAttribute("reservationPage", reservationPage);         
-        
-        return "reservations/index";
-    }
-    
-    @GetMapping("/restaurants/{id}/reservations/input")
-    public String confirm(@PathVariable(name = "id") Integer id,
-                          @ModelAttribute ReservationInputForm reservationInputForm,
-                          BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes,
-                          @AuthenticationPrincipal UserDetailsImpl userDetailsImpl,                          
-                          Model model) 
-    {
-    	Restaurant restaurant = restaurantRepository.getReferenceById(id);
-    	Integer numberOfPeople = reservationInputForm.getNumberOfPeople();
-    	Integer seats = restaurant.getSeats();
-        
-        if (numberOfPeople != null) {
-            if (!reservationService.isWithinSeats(numberOfPeople, seats)) {
-                FieldError fieldError = new FieldError(bindingResult.getObjectName(), "numberOfPeople", "人数が定員を超えています。");
-                bindingResult.addError(fieldError);                
-            }
-        }
-        
-        if (bindingResult.hasErrors()) {            
-            model.addAttribute("restaurant", restaurant);            
-            model.addAttribute("errorMessage", "予約内容に不備があります。"); 
-            return "restaurants/show";
-        }
-        
-        redirectAttributes.addFlashAttribute("reservationInputForm", reservationInputForm);           
-        
-        return "redirect:/restaurants/{id}/reservations/confirm";
-    }
-    
-    @GetMapping("/restaurants/{id}/reservations/confirm")
-    public String confirm(@PathVariable(name = "id") Integer id,
-                          @ModelAttribute ReservationInputForm reservationInputForm,
-                          @AuthenticationPrincipal UserDetailsImpl userDetailsImpl,                          
-                          Model model) 
-    {        
-    	Restaurant restaurant = restaurantRepository.getReferenceById(id);
-        User user = userDetailsImpl.getUser();
-        
-        //日付を表示する
-        LocalDate checkinDate = reservationInputForm.getCheckinDate();
-        
-        
-        ReservationRegisterForm reservationRegisterForm = new ReservationRegisterForm(restaurant.getId(), user.getId(), checkinDate.toString(), reservationInputForm.getNumberOfPeople());
-        
-        model.addAttribute("restaurant", restaurant);  
-        model.addAttribute("reservationRegisterForm", reservationRegisterForm);       
-        
-        return "reservations/confirm";
-    }
+	public ReservationController(ReservationRepository reservationRepository, RestaurantRepository restaurantRepository,
+			ReservationService reservationService) {
+		this.reservationRepository = reservationRepository;
+		this.restaurantRepository = restaurantRepository;
+		this.reservationService = reservationService;
+	}
+
+	@GetMapping("/reservations")
+	public String index(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
+			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
+			Model model) {
+		User user = userDetailsImpl.getUser();
+		Page<Reservation> reservationPage = reservationRepository.findByUserOrderByCreatedAtDesc(user, pageable);
+
+		model.addAttribute("reservationPage", reservationPage);
+
+		return "reservations/index";
+	}
+
+	@GetMapping("/restaurants/{id}/reservations/input")
+	public String confirm(@PathVariable(name = "id") Integer id,
+			@ModelAttribute ReservationInputForm reservationInputForm,
+			BindingResult bindingResult,
+			RedirectAttributes redirectAttributes,
+			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
+			Model model) {
+		Restaurant restaurant = restaurantRepository.getReferenceById(id);
+		Integer numberOfPeople = reservationInputForm.getNumberOfPeople();
+		Integer seats = restaurant.getSeats();
+
+		if (numberOfPeople != null) {
+			if (!reservationService.isWithinSeats(numberOfPeople, seats)) {
+				FieldError fieldError = new FieldError(bindingResult.getObjectName(), "numberOfPeople",
+						"人数が定員を超えています。");
+				bindingResult.addError(fieldError);
+			}
+		}
+
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("restaurant", restaurant);
+			model.addAttribute("errorMessage", "予約内容に不備があります。");
+			return "restaurants/show";
+		}
+
+		redirectAttributes.addFlashAttribute("reservationInputForm", reservationInputForm);
+
+		return "redirect:/restaurants/{id}/reservations/confirm";
+	}
+
+	@GetMapping("/restaurants/{id}/reservations/confirm")
+	public String confirm(@PathVariable(name = "id") Integer id,
+			@ModelAttribute ReservationInputForm reservationInputForm,
+			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
+			Model model) {
+		Restaurant restaurant = restaurantRepository.getReferenceById(id);
+		User user = userDetailsImpl.getUser();
+
+		//日付を表示する
+		LocalDate checkinDate = reservationInputForm.getCheckinDate();
+		ReservationRegisterForm reservationRegisterForm = new ReservationRegisterForm(restaurant.getId(), user.getId(),
+				checkinDate.toString(), reservationInputForm.getNumberOfPeople());
+
+		model.addAttribute("restaurant", restaurant);
+		model.addAttribute("reservationRegisterForm", reservationRegisterForm);
+
+		return "reservations/confirm";
+	}
 }
