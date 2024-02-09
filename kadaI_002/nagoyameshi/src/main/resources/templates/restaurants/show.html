@@ -168,9 +168,8 @@
 														class="col-form-label text-md-left fw-bold">日付</label>
 													<div th:if="${#fields.hasErrors('checkinDate')}"
 														class="text-danger small mb-2" th:errors="*{checkinDate}">
-														<input type="text" class="form-control"
-															th:field="*{checkinDate}">
 													</div>
+													<input type="date" class="form-control" th:field="*{checkinDate}">
 												</div>
 
 												<div class="form-group mb-4">
