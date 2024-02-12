@@ -11,39 +11,39 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class RestaurantEditForm {
-	  @NotNull
-      private Integer id;
-	  
-	    @NotBlank(message = "店舗名を入力してください。")
-	    private String name;	
-		
-		private MultipartFile imageFile;
-		
-		@NotBlank(message = "説明を入力してください。")
-	    private String description;
-		
-		@NotNull(message = "価格帯を入力してください。")
-	    @Min(value = 100, message = "価格帯は100円以上に設定してください。")
-	    private Integer price;
-		
-		@NotBlank(message = "郵便番号を入力してください。")
-	    private String postalCode;
-	    
-	    @NotBlank(message = "住所を入力してください。")
-	    private String address;
-	    
-	    @NotBlank(message = "電話番号を入力してください。")
-	    private String phoneNumber;
-	    
-	    @NotBlank(message = "営業時間を入力してください。")
-	    private String businessHours;
-	    
-	    @NotBlank(message = "定休日を入力してください。")
-	    private String regularHoliday;
-	    
-	    @NotBlank(message = "座席数を入力してください。")
-	    private String seats;
-	    
-	    @NotBlank(message = "カテゴリを入力してください。")
-	    private String category;
-	}
+	@NotNull
+	private Integer id;
+
+	@NotBlank(message = "店舗名を入力してください。")
+	private String name;
+
+	private MultipartFile imageFile;
+
+	@NotBlank(message = "説明を入力してください。")
+	private String description;
+
+	@NotNull(message = "価格帯を入力してください。")
+	@Min(value = 100, message = "価格帯は100円以上に設定してください。")
+	private Integer price;
+
+	@NotBlank(message = "郵便番号を入力してください。")
+	private String postalCode;
+
+	@NotBlank(message = "住所を入力してください。")
+	private String address;
+
+	@NotBlank(message = "電話番号を入力してください。")
+	private String phoneNumber;
+
+	@NotBlank(message = "営業時間を入力してください。")
+	private String businessHours;
+
+	@NotBlank(message = "定休日を入力してください。")
+	private String regularHoliday;
+
+	@NotBlank(message = "座席数を入力してください。")
+	private Integer seats;
+
+	@NotBlank(message = "カテゴリを入力してください。")
+	private String category;
+}
