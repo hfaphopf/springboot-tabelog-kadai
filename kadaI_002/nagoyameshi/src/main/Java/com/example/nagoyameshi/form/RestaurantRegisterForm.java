@@ -36,7 +36,7 @@ public class RestaurantRegisterForm {
 	@NotBlank(message = "定休日を入力してください。")
 	private String regularHoliday;
 
-	@NotBlank(message = "座席数を入力してください。")
+	@NotNull(message = "座席数を入力してください。")
 	private Integer seats;
 
 	@NotBlank(message = "カテゴリを入力してください。")
