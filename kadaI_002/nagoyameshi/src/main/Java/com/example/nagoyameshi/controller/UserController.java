@@ -8,13 +8,13 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.UserEditForm;
+import com.example.nagoyameshi.form.UserEditPaidForm;
 import com.example.nagoyameshi.repository.UserRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
 import com.example.nagoyameshi.service.UserService;
@@ -24,7 +24,6 @@ import com.example.nagoyameshi.service.UserService;
 public class UserController {
 	private final UserRepository userRepository;
 	private final UserService userService;
-
 	public UserController(UserRepository userRepository, UserService userService) {
 		this.userRepository = userRepository;
 		this.userService = userService;
@@ -32,7 +31,7 @@ public class UserController {
 
 	@GetMapping
 	public String index(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl, Model model) {
-		User user = userRepository.getReferenceById(userDetailsImpl.getUser().getId());
+		User user = userRepository.findUserById(userDetailsImpl.getUser().getId());
 
 		model.addAttribute("user", user);
 
@@ -73,22 +72,33 @@ public class UserController {
 	//ログイン中のユーザー情報をメソッドの引数で受け取る
 	public String changepaid(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl, Model model) {
 		//最新のユーザー情報を取得
-		User user = userRepository.getReferenceById(userDetailsImpl.getUser().getId());
+		//User user = userRepository.findUserById(userDetailsImpl.getUser().getId());
+		UserEditPaidForm up = new UserEditPaidForm(userDetailsImpl.getUser().getId());
 		
-		model.addAttribute("user", user);
+//		model.addAttribute("user", user);
+		model.addAttribute("userEditPaidForm", up);
 		
 		return "user/changepaid";
 	}
 	
-	@PostMapping("/{id}/paidupdate")
-    public String paidupdate(@PathVariable(name = "id") @ModelAttribute @Validated BindingResult bindingResult, RedirectAttributes redirectAttributes) {        
+	//無料会員から有料会員に変更
+	@PostMapping("/editpaid")
+    public String editPaid(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl, @ModelAttribute @Validated UserEditPaidForm userEditPaidForm, BindingResult bindingResult, Model model,  RedirectAttributes redirectAttributes) {     
+		System.out.println("editpaid######" + userDetailsImpl.getUser().getId());
+		System.out.println("bindingResult.hasErrors():" + bindingResult);
         if (bindingResult.hasErrors()) {
             return "user/changepaid";
         }
         
+        //現在設定されている会員レベル(Role)の逆を設定：1→2　もしくは、2→1。
+        userService.updatePaid(userDetailsImpl.getUser().getId());
+        
+        //ここから以下を実装してください。
+        
+        //有料会員に変更後、会員詳細ページに遷移し、メッセージを表示する
         redirectAttributes.addFlashAttribute("successMessage", "ステータスを有料会員に変更しました。");
         
-        return "redirect:/admin/users";
+        return "redirect:/admin/users/index";
     }
 	
 	@GetMapping("/company")
