@@ -57,7 +57,7 @@ public class UserService {
 
 	// メールアドレスが登録済みかどうかをチェックする
 	public boolean isEmailRegistered(String email) {
-		User user = userRepository.findByEmail(email);
+		User user = userRepository.findUserByEmail(email);
 		return user != null;
 	}
 
@@ -79,10 +79,23 @@ public class UserService {
 		return !userEditForm.getEmail().equals(currentUser.getEmail());
 	}
 
+	//UserRepositoryに取得したidを渡す
 	@Transactional
-	public void paidupdate(User user) {
-		User user1 = userRepository.getReferenceById(user.getId());
-
-		userRepository.save(user);
+	public void updatePaid(int id) {
+		User changepaiduser= userRepository.findUserById(id);
+		System.out.println("changepaiduser:" + changepaiduser);
+		
+		//現在設定されている会員レベルの逆を設定：無料会員→有料会員　もしくは、その逆。
+		Role r = changepaiduser.getRole();
+		String role = r.getName();
+		Role newRole = new Role();
+		if (r.getId() == 1) {
+			newRole.setId(2);
+		} else {
+			newRole.setId(1);
+		}
+		changepaiduser.setRole(newRole);
+		
+		userRepository.save(changepaiduser);
 	}
 }
