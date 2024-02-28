@@ -90,7 +90,7 @@ public class UserService {
 		String role = r.getName();
 		Role newRole = new Role();
 		if (r.getId() == 1) {
-			newRole.setId(2);
+			newRole.setId(3);
 		} else {
 			newRole.setId(1);
 		}
