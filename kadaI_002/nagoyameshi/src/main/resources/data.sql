@@ -52,6 +52,8 @@ INSERT IGNORE INTO restaurants (id, name, image_name, description, price, seats,
 -- rolesテーブル
 INSERT IGNORE INTO roles (id, name) VALUES (1, 'ROLE_GENERAL');
 INSERT IGNORE INTO roles (id, name) VALUES (2, 'ROLE_ADMIN');
+INSERT IGNORE INTO roles (id, name) VALUES (3, 'ROLE_PAY');
+INSERT IGNORE INTO roles (id, name) VALUES (4, 'ROLE‗ADMIN_PAY');
 
 -- usersテーブル
 INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (1, '佐々木 太郎', 'ササキ タロウ', '101-0022', '東京都千代田区神田練塀町300番地', '090-1234-5678', 'taro.samurai@example.com', 'password', 1, true);
