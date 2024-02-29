@@ -111,15 +111,16 @@ public class UserController {
 		//現在設定されている会員レベル(Role)の逆を設定：1→2　もしくは、2→1。
 		userService.updatePaid(userDetailsImpl.getUser().getId());
 
-
-		//有料会員に変更後、会員詳細ページに遷移し、メッセージを表示する
-		redirectAttributes.addFlashAttribute("successMessage", "ステータスを有料会員に変更しました。");
-
 		return "redirect:/admin/users/index";
 	}
 
 	@GetMapping("/company")
 	public String company() {
 		return "auth/company";
+	}
+	
+	@GetMapping("/subscription")
+	public String subscription() {
+		return "user/subscription";
 	}
 }
