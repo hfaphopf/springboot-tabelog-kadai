@@ -8,7 +8,7 @@
          <title>レビュー編集</title>   																
      </head>																
      <body>																
-         <div class="samuraitravel-wrapper">																
+         <div class="nagoyameshi-wrapper">																
              <!-- ヘッダー -->																
              <div th:replace="~{fragment :: header}"></div>																
              																
@@ -36,12 +36,12 @@
                                      </div>																
                                      <div class="col-md-9">                                    																
                                          <div th:if="${#fields.hasErrors('score')}" class="text-danger small mb-2" th:errors="*{score}"></div>                                    																
-                                         <select class="form-select samuraitravel-star" th:field="*{score}">																
-                                             <option class="samuraitravel-star" value="5" selected>&#9733;&#9733;&#9733;&#9733;&#9733;</option>																
-                                             <option class="samuraitravel-star" value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>																
-                                             <option class="samuraitravel-star" value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>																
-                                             <option class="samuraitravel-star" value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>																
-                                             <option class="samuraitravel-star" value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>                                                                                                                                                                            																
+                                         <select class="form-select nagoyameshi-star" th:field="*{score}">																
+                                             <option class="nagoyameshi-star" value="5" selected>&#9733;&#9733;&#9733;&#9733;&#9733;</option>																
+                                             <option class="nagoyameshi-star" value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>																
+                                             <option class="nagoyameshi-star" value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>																
+                                             <option class="nagoyameshi-star" value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>																
+                                             <option class="nagoyameshi-star" value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>                                                                                                                                                                            																
                                          </select>																
                                      </div>																
                                  </div>                               																
