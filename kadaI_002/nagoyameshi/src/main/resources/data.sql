@@ -86,3 +86,17 @@ INSERT IGNORE INTO reservations (id, restaurant_id, user_id, number_of_people, r
 INSERT IGNORE INTO reservations (id, restaurant_id, user_id, number_of_people, reservation_date) VALUES (14, 14, 1, 4, '2024-02-09');
 INSERT IGNORE INTO reservations (id, restaurant_id, user_id, number_of_people, reservation_date) VALUES (15, 15, 1, 5, '2024-05-08');
 INSERT IGNORE INTO reservations (id, restaurant_id, user_id, number_of_people, reservation_date) VALUES (16, 16, 1, 7, '2024-01-15');
+
+-- reviewsテーブル
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (1, 1, 1, 1, 'テスト');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (2, 1, 2, 2, 'テストデータ2');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (3, 1, 3, 3, 'テストデータ3');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (4, 1, 4, 4, 'テストデータ4');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (5, 1, 5, 5, 'テストデータ5');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (6, 1, 6, 1, 'テストデータ6');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (7, 1, 7, 2, 'テストデータ7');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (8, 1, 8, 3, 'テストデータ8');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (9, 1, 9, 4, 'テストデータ9');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (10, 1, 10, 5, 'テストデータ10');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (11, 1, 11, 1, 'テストデータ11');
+INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (12, 1, 12, 2, 'テストデータ12');
