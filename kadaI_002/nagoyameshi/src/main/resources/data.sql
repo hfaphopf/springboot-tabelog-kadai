@@ -100,3 +100,17 @@ INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (
 INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (10, 1, 10, 5, 'テストデータ10');
 INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (11, 1, 11, 1, 'テストデータ11');
 INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (12, 1, 12, 2, 'テストデータ12');
+
+-- favoritesテーブル
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (1, 1, 4);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (2, 2, 4);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (3, 4, 9);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (4, 8, 2);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (5, 5, 1);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (6, 6, 1);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (7, 7, 1);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (8, 8, 1);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (9, 9, 3);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (10, 10, 7);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (11, 11, 1);
+ INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (12, 12, 1);
