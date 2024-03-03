@@ -123,7 +123,7 @@
 							<p th:if="${restaurantPage.getTotalPages() > 1}" class="fs-5 mb-3"
 								th:text="${'検索結果：' + restaurantPage.getTotalElements() + '件' + '（' + (restaurantPage.getNumber() + 1) + ' / ' + restaurantPage.getTotalPages() + ' ページ）'}">
 							</p>
-							
+
 							<p th:unless="${restaurantPage.getTotalPages() > 1}" class="fs-5 mb-3"
 								th:text="${'検索結果：' + restaurantPage.getTotalElements() + '件'}"></p>
 
