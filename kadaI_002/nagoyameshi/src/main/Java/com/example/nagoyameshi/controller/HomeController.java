@@ -11,20 +11,17 @@ import com.example.nagoyameshi.repository.RestaurantRepository;
 
 @Controller
 public class HomeController {
-	private final RestaurantRepository restaurantRepository;        
-    
-    public HomeController(RestaurantRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;            
-    }
-    @GetMapping("/")
-    public String index(Model model) {
-        List<Restaurant> newRestaurants = restaurantRepository.findTop10ByOrderByCreatedAtDesc();
-        model.addAttribute("newRestaurants", newRestaurants);
-        return "index";
-    }
-    
-    @GetMapping("/company")
-    public String company() {
-    return "admin/company/CompanyPage";
-    }      
+	private final RestaurantRepository restaurantRepository;
+
+	public HomeController(RestaurantRepository restaurantRepository) {
+		this.restaurantRepository = restaurantRepository;
+	}
+
+	@GetMapping("/")
+	public String index(Model model) {
+		List<Restaurant> newRestaurants = restaurantRepository.findTop10ByOrderByCreatedAtDesc();
+		model.addAttribute("newRestaurants", newRestaurants);
+		return "index";
+	}
+
 }
