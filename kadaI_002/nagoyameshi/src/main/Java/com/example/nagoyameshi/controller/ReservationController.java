@@ -100,12 +100,12 @@ public class ReservationController {
 
 		return "reservations/confirm";
 	}
-	
+
 	// フォームの送信先を担当するメソッド
 	@PostMapping("/restaurants/{id}/reservations/create")
-    public String create(@ModelAttribute ReservationRegisterForm reservationRegisterForm) {                
-        reservationService.create(reservationRegisterForm);        
-        
-        return "redirect:/reservations?reserved";
-    }
+	public String create(@ModelAttribute ReservationRegisterForm reservationRegisterForm) {
+		reservationService.create(reservationRegisterForm);
+
+		return "redirect:/reservations?reserved";
+	}
 }
