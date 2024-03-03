@@ -18,43 +18,44 @@ public class Restaurant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "name")
-    private String name;
-	
+	private String name;
+
 	@Column(name = "image_name")
-    private String imageName;
+	private String imageName;
 
-    @Column(name = "description")
-    private String description;
+	@Column(name = "description")
+	private String description;
 
-    @Column(name = "price")
-    private Integer price;
+	@Column(name = "price")
+	private Integer price;
 
-    @Column(name = "seats")
-    private String seats;
-    
-    @Column(name = "postal_code")
-    private String postalCode;
+	@Column(name = "seats")
+	private Integer seats;
 
-    @Column(name = "address")
-    private String address;
+	@Column(name = "postal_code")
+	private String postalCode;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
+	@Column(name = "address")
+	private String address;
 
-    @Column(name = "category")
-    private String category;
-    
-    @Column(name = "regular_holiday")
-    private String regularHoliday;
-    
-    @Column(name = "business_hours")
-    private String businessHours;
-    
-    @Column(name = "created_at", insertable = false, updatable = false)
-    private Timestamp createdAt;
+	@Column(name = "phone_number")
+	private String phoneNumber;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    private Timestamp updatedAt;
+	@Column(name = "category")
+	private String category;
+
+	@Column(name = "regular_holiday")
+	private String regularHoliday;
+
+	@Column(name = "business_hours")
+	private String businessHours;
+
+	@Column(name = "created_at", insertable = false, updatable = false)
+	private Timestamp createdAt;
+
+	@Column(name = "updated_at", insertable = false, updatable = false)
+	private Timestamp updatedAt;
+
 }
