@@ -118,7 +118,7 @@ public class UserController {
 	public String company() {
 		return "auth/company";
 	}
-	
+
 	@GetMapping("/subscription")
 	public String subscription() {
 		return "user/subscription";
