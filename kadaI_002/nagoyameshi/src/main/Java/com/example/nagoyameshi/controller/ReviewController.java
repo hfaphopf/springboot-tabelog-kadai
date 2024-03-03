@@ -45,7 +45,7 @@ public class ReviewController {
 	public String index(@PathVariable(name = "restaurantId") Integer restaurantId,
 			@PageableDefault(page = 0, size = 10, sort = "id") Pageable pageable, Model model) {
 		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantId);
-		
+
 		//検索時、投稿が古い順にレビューを並び替え
 		Page<Review> reviewPage = reviewRepository.findByRestaurantOrderByCreatedAtDesc(restaurant, pageable);
 
