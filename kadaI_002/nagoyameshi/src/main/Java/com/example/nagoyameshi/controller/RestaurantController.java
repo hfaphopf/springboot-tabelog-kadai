@@ -85,7 +85,8 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/{id}")
-	public String show(@PathVariable(name = "id") Integer id, Model model,  @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+	public String show(@PathVariable(name = "id") Integer id, Model model,
+			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
 		Restaurant restaurant = restaurantRepository.getReferenceById(id);
 
 		boolean hasUserAlreadyReviewed = false;
