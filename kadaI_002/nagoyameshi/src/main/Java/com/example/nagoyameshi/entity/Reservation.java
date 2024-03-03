@@ -18,30 +18,27 @@ import lombok.Data;
 @Data
 public class Reservation {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
-    
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant; 
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;     
-    
-    @Column(name = "number_of_people")
-    private Integer numberOfPeople;
-    
-    @Column(name = "reservation_date")
-    private LocalDate reservationDate; 
-    
-    @Column(name = "time")
-    private String time;
-    
-    @Column(name = "created_at", insertable = false, updatable = false)
-    private Timestamp createdAt;
-    
-    @Column(name = "updated_at", insertable = false, updatable = false)
-    private Timestamp updatedAt;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+
+	@ManyToOne
+	@JoinColumn(name = "restaurant_id")
+	private Restaurant restaurant;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@Column(name = "number_of_people")
+	private Integer numberOfPeople;
+
+	@Column(name = "reservation_date")
+	private LocalDate reservationDate;
+
+	@Column(name = "created_at", insertable = false, updatable = false)
+	private Timestamp createdAt;
+
+	@Column(name = "updated_at", insertable = false, updatable = false)
+	private Timestamp updatedAt;
 }
