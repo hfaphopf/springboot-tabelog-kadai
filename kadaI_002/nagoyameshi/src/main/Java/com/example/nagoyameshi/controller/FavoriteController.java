@@ -21,47 +21,48 @@ import com.example.nagoyameshi.service.FavoriteService;
 
 @Controller
 public class FavoriteController {
-	private final FavoriteRepository favoriteRepository;					 					
-    private final FavoriteService favoriteService;
+	private final FavoriteRepository favoriteRepository;
+	private final FavoriteService favoriteService;
 	private final RestaurantRepository restaurantRepository;
-	
-    public FavoriteController(FavoriteRepository favoriteRepository, RestaurantRepository restaurantRepository, FavoriteService favoriteService) {        					
-        this.favoriteRepository = favoriteRepository;					
-        this.restaurantRepository = restaurantRepository;					
-        this.favoriteService = favoriteService;					
-    }   					
 
-    @GetMapping("/favorites")					
-    public String index(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl, @PageableDefault(page = 0, size = 10, sort = "id") Pageable pageable, Model model) {  					
-        User user = userDetailsImpl.getUser();   					
-        Page<Favorite> favoritePage = favoriteRepository.findByUserOrderByCreatedAtDesc(user, pageable);       					
-                            					
-        model.addAttribute("favoritePage", favoritePage);                					
-        					
-        return "favorites/index";					
-    }
-    
-    @PostMapping("/restaurants/{restaurantId}/favorites/create")					
-    public String create(@PathVariable(name = "restaurantId") Integer restaurantId,					
-                         @AuthenticationPrincipal UserDetailsImpl userDetailsImpl,                                                  					
-                         RedirectAttributes redirectAttributes,					
-                         Model model)					
-    {    					
-    	Restaurant restaurant = restaurantRepository.getReferenceById(restaurantId);					
-        User user = userDetailsImpl.getUser();        					
-        					
-        favoriteService.create(restaurant, user);					
-        redirectAttributes.addFlashAttribute("successMessage", "お気に入りに追加しました。");    					
-        					
-        return "redirect:/restaurants/{restaurantId}";					
-    }					
-    					
-    @PostMapping("/restaurants/{restaurantId}/favorites/{favoriteId}/delete")					
-    public String delete(@PathVariable(name = "favoriteId") Integer favoriteId, RedirectAttributes redirectAttributes) {        					
-        favoriteRepository.deleteById(favoriteId);					
-                					
-        redirectAttributes.addFlashAttribute("successMessage", "お気に入りを解除しました。");					
-        					
-        return "redirect:/restaurants/{restaurantId}";					
-    }
+	public FavoriteController(FavoriteRepository favoriteRepository, RestaurantRepository restaurantRepository,
+			FavoriteService favoriteService) {
+		this.favoriteRepository = favoriteRepository;
+		this.restaurantRepository = restaurantRepository;
+		this.favoriteService = favoriteService;
+	}
+
+	@GetMapping("/favorites")
+	public String index(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
+			@PageableDefault(page = 0, size = 10, sort = "id") Pageable pageable, Model model) {
+		User user = userDetailsImpl.getUser();
+		Page<Favorite> favoritePage = favoriteRepository.findByUserOrderByCreatedAtDesc(user, pageable);
+
+		model.addAttribute("favoritePage", favoritePage);
+
+		return "favorites/index";
+	}
+
+	@PostMapping("/restaurants/{restaurantId}/favorites/create")
+	public String create(@PathVariable(name = "restaurantId") Integer restaurantId,
+			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
+			RedirectAttributes redirectAttributes,
+			Model model) {
+		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantId);
+		User user = userDetailsImpl.getUser();
+
+		favoriteService.create(restaurant, user);
+		redirectAttributes.addFlashAttribute("successMessage", "お気に入りに追加しました。");
+
+		return "redirect:/restaurants/{restaurantId}";
+	}
+
+	@PostMapping("/restaurants/{restaurantId}/favorites/{favoriteId}/delete")
+	public String delete(@PathVariable(name = "favoriteId") Integer favoriteId, RedirectAttributes redirectAttributes) {
+		favoriteRepository.deleteById(favoriteId);
+
+		redirectAttributes.addFlashAttribute("successMessage", "お気に入りを解除しました。");
+
+		return "redirect:/restaurants/{restaurantId}";
+	}
 }
